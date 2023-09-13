@@ -4,6 +4,7 @@ from whoosh import fields
 from whoosh.fields import Schema
 from whoosh.index import create_in, open_dir, FileIndex
 from whoosh.multiproc import MpWriter
+from whoosh import writing as whoosh_writing
 from whoosh.writing import SegmentWriter
 from whoosh.qparser import QueryParser
 from whoosh import query as whoosh_query
@@ -27,11 +28,8 @@ class Types:
 
 class Index:
 
-    def __init__(self, populate_to_index: Callable[..., Iterable[FileData]]) -> None:
-        self.index, exists = Index.__open_index()
-
-        if not exists:
-            self.add_documents(populate_to_index())
+    def __init__(self) -> None:
+        self.index, _ = Index.__open_index()
 
     @staticmethod
     def __open_index() -> tuple[Types.Index, bool]:
@@ -75,3 +73,6 @@ class Index:
             raise InvalidQueryException(query_str)
 
         return query
+
+    def close(self):
+        self.index.close()
