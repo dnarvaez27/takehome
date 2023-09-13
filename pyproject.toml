@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "takehome"
+version = "3.11"
+description = ""
+authors = ["David Narvaez <dnarvaez27@outlook.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+whoosh = "^2.7.4"
+
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^2.17.5"
+yapf = "^0.40.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.yapf]
+column_limit = 120
+allow_split_before_dict_value = false
