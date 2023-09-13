@@ -6,7 +6,7 @@ from src.utils import FileData
 def extract_file_data(path: str):
     _, ext = os.path.splitext(path)
     size = os.path.getsize(path)
-    filename = os.path.basename(path)
+    filename = os.path.basename(path)[:-len(ext)]
     return (path, filename, ext[1:] or None, size)
 
 
