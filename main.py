@@ -1,7 +1,7 @@
 from typing import Optional
 from enum import Enum
 import qprompt
-from src.file_utils import extract_dir_info
+from src.file_utils import traverse_files
 from src.indexer import Index
 from src.utils import InvalidQueryException
 
@@ -48,7 +48,7 @@ def make_search(index: Index):
 def refresh_index(index: Index):
     dir_path = qprompt.ask_str(f'Enter directory path (default to {DEFAULT_DIR})')
     index.clear()
-    index.add_documents(extract_dir_info(dir_path or DEFAULT_DIR, concurrency=TRAVERSAL_PROCESSES))
+    index.add_documents(traverse_files(dir_path or DEFAULT_DIR, concurrency=TRAVERSAL_PROCESSES))
 
 
 def prompt(index: Optional[Index]):
